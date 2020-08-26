@@ -1,6 +1,6 @@
 # 3D-Facial-pointcloud-Creation-and-Visualization-using-SFM-and-MVS
 This repository contains educational code for creating and visualizing a sparse facial point cloud for 3D reconstruction purposes.
-The camera parameters have been customized for facial video capture on iPhone6S' front camera. 
+The camera parameters have been customized for facial video capture on iPhone6S front camera. 
 
 Requirements in the Virtual environment
 --------------------------------------------------
@@ -10,7 +10,21 @@ opencv-contrib-python==3.3.0.10
 python-dateutil==2.6.1
 scipy==1.0.0
 
-File descriptions
+
+### Steps to run the program
+1. Specify sample video, save location and DLIB landmark detector model location in main.sh
+2. ./main.sh 
+
+	This runs main.py that uses the following 4 files:
+	- video2frames.py 
+	- preprocess.py (Preprocess class for background subtraction)
+	- facial_landmarks.py (finds and processes facial landmarks)
+	- sfm_structure.py (SFMGetter class for getting 3D points)
+
+3. The points can be visualized using VTK in sparse_cloud_using_vtk.py. 
+On terminal, run python sparse_cloud_using_vtk.python points_3d.csv 
+
+Other Files
 --------------------------------------------------
 sfm_structure.py 
 --------------------------------------------------
@@ -33,54 +47,22 @@ background_sub.py
 - Edge detection
 - Heirarchical Contour detection
 - Background Subtraction
-
---------------------------------------------------
-cannyedge.py
---------------------------------------------------
-- Reads an image
-- Uses OpenCV's Canny edge detection to output an edge map.
-
---------------------------------------------------
-countframes.py
---------------------------------------------------
-- helper python script to count frames
-- embedded directly in other scripts
-- given just for reference
-
 --------------------------------------------------
 facial_landmark.py
 --------------------------------------------------
 - Entire Facial Landmark detection pipeline
 - takes trained model given as a .dat file 
 - self-explanatory script
-
-
 --------------------------------------------------
 segmentation.py
 --------------------------------------------------
 - performs heirarchical contour detection based off of human faces
 - imported in background_sub.py
-
-
 --------------------------------------------------
 sparse_cloud_using_vtk.py
 --------------------------------------------------
--Uses Visualization Toolkit VTK Library for a good presentation of the point cloud. 
-
+- Uses Visualization Toolkit VTK Library for a good presentation of the point cloud. 
 --------------------------------------------------
-vid2frames.py
+video2frames.py
 --------------------------------------------------
-Takes a video as an input and outputs the frames
-
-===================================================================================
-Instructions for running the code:
-1. Input video file to vid2frames script and give the directory for storing the output frames. 
-2. Perform background subtraction on all the frames in the directory
-3. In sfm_structure, choose the frames and get the output 3D points csv file
-4ls
-. On terminal, run python sparse_cloud_using_vtk.python test.csv 
-
-
-
-
-
+- Takes a video as an input and outputs the frames
