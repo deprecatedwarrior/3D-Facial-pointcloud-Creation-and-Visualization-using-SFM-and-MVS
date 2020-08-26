@@ -16,19 +16,22 @@ from facial_landmark import facial_landmark
 ##### ADD THE PATH HERE ##########
 
 class SFMGetter:
-	def __init__(self, path1, path2, modelfile, savepath):
-		self.path1 = path1
-		self.path2 = path2
-		self.path_predictor = modelfile
+	def __init__(self, ):
 		self.top_matches = 800 # number of points to be matched
 		self.K=[[1229.0,0.0,360.0,0.0,640.0,1153.0,0,0,1]]
-		self.savepath = savepath
 
-	def get3D(self):
+	def get3D(self, path1, path2, shape1, shape2):
 		'''
+		Params: 
+		- path1, path2 = two frames to perform sfm
+		- shape1, shape2 = facial landmarks from frame 1 and frame2
+		Use:
 		- Reads two frames and returns the 3D world coordinates using SFM. 
 		- Utilizes SIFT feature detector, Brute Force Matcher, 
 		'''
+		self.path1 = path1
+		self.path2 = path2
+		
 		# Reading the images
 		img1 = cv2.imread(self.path1)
 		img2 = cv2.imread(self.path2)
@@ -84,7 +87,7 @@ class SFMGetter:
 		#print pts2
 
 		#Taking Facial landmark points from DLIB's landmark detection
-		shape1, shape2 = facial_landmark(img1, img2)
+		# shape1, shape2 = facial_landmark(img1, img2)
 		
 		#merging the key points obtained with the landmark points
 		pts1 = np.vstack((pts1, shape1))
@@ -132,8 +135,8 @@ class SFMGetter:
 		#print point_3d
 		return point_3d
 
-	def writeCSV(self, points):
-		with open(self.savepath, 'wb') as f:
+	def writeCSV(self, points, savepath):
+		with open(savepath, 'wb') as f:
 			wtr = csv.writer(f, delimiter= ',')
 			wtr.writerows(points)
 
