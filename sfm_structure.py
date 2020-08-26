@@ -16,12 +16,13 @@ from facial_landmark import facial_landmark
 ##### ADD THE PATH HERE ##########
 
 class SFMGetter:
-	def __init__(self, path1, path2, modelfile):
+	def __init__(self, path1, path2, modelfile, savepath):
 		self.path1 = path1
 		self.path2 = path2
 		self.path_predictor = modelfile
 		self.top_matches = 800 # number of points to be matched
 		self.K=[[1229.0,0.0,360.0,0.0,640.0,1153.0,0,0,1]]
+		self.savepath = savepath
 
 	def get3D(self):
 		'''
@@ -129,11 +130,12 @@ class SFMGetter:
 		point_4d_nonHom = pts4d / np.tile(pts4d[-1, :], (4, 1))
 		point_3d = point_4d_nonHom[:3, :].T
 		#print point_3d
+		return point_3d
 
-		# Export as csv
-		with open('test.csv', 'wb') as f:
+	def writeCSV(self, points):
+		with open(self.savepath, 'wb') as f:
 			wtr = csv.writer(f, delimiter= ',')
-			wtr.writerows(point_3d)
+			wtr.writerows(points)
 
 		#Exporting to txt
 		#np.savetxt("points_3d.csv", point_3d, delimiter="," , usecols=np.arange(0,2))
@@ -141,6 +143,6 @@ class SFMGetter:
  		# Display the 3D points
 		#fig=plt.figure()
  		#ax=Axes3D(fig)
-		#ax.scatter(point_3d[:,0],point_3d[:,1],point_3d[:,2],c='r',marker='.')
+		#ax.scatter(points[:,0],points[:,1],points[:,2],c='r',marker='.')
 		#plt.show()
 	
