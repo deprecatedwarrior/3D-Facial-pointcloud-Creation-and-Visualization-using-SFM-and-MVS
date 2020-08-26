@@ -4,19 +4,11 @@ The intrinsic parameters have been customized for facial video capture on iPhone
 
 Requirements in the Virtual environment
 --------------------------------------------------
-cycler==0.10.0
-functools32==3.2.3.post2
 matplotlib==2.0.2
 numpy==1.13.3
 opencv-contrib-python==3.3.0.10
-pyparsing==2.2.0
 python-dateutil==2.6.1
-pytz==2017.2
 scipy==1.0.0
-six==1.11.0
-subprocess32==3.2.7
-
-Works on Python 2.7.* also
 
 File descriptions
 --------------------------------------------------
@@ -29,9 +21,8 @@ sfm_structure.py
 - Ratio test to store the top matches
 - Apply DLIB's Facial Landmark Detector 
 - Initialize SFM pipeline
-- K the intrinsic paramters compatible to iPhone 6S. Depending on the phone's version, this has to be taken care of. The requirement of the deliverable was for iPhone, hence the chosen paramters. 
-- Triangulation to estimate pose
-- Convert to non homogeneous points
+- Camera parameters compatible to iPhone 6S. The requirement of the deliverable was for iPhone, hence the chosen paramters. 
+- Estimate pose and convert to non homogeneous coordinates
 - Export the 3D coordinates as a csv file 
 
 --------------------------------------------------
@@ -43,14 +34,11 @@ background_sub.py
 - Heirarchical Contour detection
 - Background Subtraction
 
-Note: After performing background subtraction, some contours can deliver black frames. To remove those frames from the directory that contains the video's frames, average energy of the frame should be calculated. If it is less than a threshold value, discard that frame. It is advised to make such a provision only after conducting a lot of experiments in different settings, illumination, etc. 
-
 --------------------------------------------------
 cannyedge.py
 --------------------------------------------------
 - Reads an image
 - Uses OpenCV's Canny edge detection to output an edge map.
-
 
 --------------------------------------------------
 countframes.py
@@ -83,7 +71,6 @@ sparse_cloud_using_vtk.py
 vid2frames.py
 --------------------------------------------------
 Takes a video as an input and outputs the frames
-
 
 ===================================================================================
 Instructions for running the code:
