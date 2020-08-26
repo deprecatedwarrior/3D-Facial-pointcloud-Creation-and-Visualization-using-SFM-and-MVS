@@ -1,6 +1,6 @@
 # 3D-Facial-pointcloud-Creation-and-Visualization-using-SFM-and-MVS
-This repository contains code for creating and visualizing a sparse facial point cloud for 3D reconstruction purposes.
-The intrinsic parameters have been customized for facial video capture on iPhone6S' front camera. 
+This repository contains educational code for creating and visualizing a sparse facial point cloud for 3D reconstruction purposes.
+The camera parameters have been customized for facial video capture on iPhone6S' front camera. 
 
 Requirements in the Virtual environment
 --------------------------------------------------
